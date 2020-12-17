@@ -1,4 +1,6 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
+const { MONGO_URI } = require('../config/keys');
 
 // Mongo connection
 mongoose.connect(process.env.MONGO_URI, {
