@@ -1,21 +1,25 @@
 require('dotenv').config();
 const mongoose = require('mongoose');
-// const { MONGO_URI } = require('../config/keys');
+
 // Mongo connection
+console.log(process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: true
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  useFindAndModify: true
 });
-console.log(process.env);
+
 // Mongoose connection object
 const db = mongoose.connection;
-// Set up an event listener that will fire once the connection opens for the DB
-// Log to the terminal what host and port we are on.
+
+// set up an event listener to fire once when the connections 'opens'
+// console log what host and port it's running on
 db.once('open', () => {
-    console.log(`Connected to MongoDB at ${db.host}:${db.port}`);
+  console.log(`Connected to MongoDB at ${db.host}:${db.port}`);
 });
+
 db.on('error', (error) => {
-    conosle.log(`Database error\n ${error}`);
+  console.log(`Database error\n${error}`);
 });
+
 module.exports.User = require('./User');
